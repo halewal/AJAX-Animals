@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Pet Pictures</title> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+</head> 
+<body> 
+    <h1>Random Cat and Dog Pictures</h1> 
+    <img id="petimage" src="{{ url }}" alt="Random Pet" style="max-width: 400px; max-height: 400px;"> 
+    <br> 
+    <button id="newDogbutton">Show me a dog!</button> 
+    <button id="newCatbutton">Show me a cat!</button> 
+ 
+    <script> 
+        $(document).ready(function() { 
+            $('#newDogbutton').click(function() { 
+                $.ajax({ 
+                    url: '/get_dog', 
+                    method: 'GET', 
+                    success: function(data) { 
+                        $('#petimage').attr('src', data); 
+                    }, 
+                    error: function(xhr, status, error) { 
+                        console.error("Error fetching new dog image:", error); 
+                    } 
+                }); 
+            }); 
+ 
+            $('#newCatbutton').click(function() { 
+                $.ajax({ 
+                    url: '/get_cat', 
+                    method: 'GET', 
+                    success: function(data) { 
+                        $('#petimage').attr('src', data); 
+                    }, 
+                    error: function(xhr, status, error) { 
+                        console.error("Error fetching new cat image:", error); 
+                    } 
+                }); 
+            }); 
+        }); 
+    </script> 
+</body> 
+</html>
